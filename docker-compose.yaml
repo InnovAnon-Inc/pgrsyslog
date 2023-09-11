@@ -1,4 +1,6 @@
 version: '3.8'
+#include:
+#  - ../postgre/docker-compose.yaml
 services:
   syslog:
     image:           innovanon/pgrsyslog
@@ -8,10 +10,10 @@ services:
       - "0.0.0.0:6514:6514"
     volumes:
       - syslog-etc:/etc/rsyslog.d:ro
-      - syslog-log:/var/log
+      - syslog-log:/var/log:rw
     restart:         always
     depends_on:
-      db:
+      postgres:
         condition:   service_healthy
 
 volumes:
