@@ -53,7 +53,7 @@ jobs:
     - name: Deploy Docker Image
       run: |
         docker push     "innovanon/pgrsyslog:$TEAMHACK_VERSION"
-        docker push      innovanon/pgrsyslog
+        docker push      innovanon/pgrsyslog:latest
       env:
         TEAMHACK_VERSION: ${{ steps.tag_version.outputs.new_tag }}
 
