@@ -18,5 +18,7 @@ services:
 
 volumes:
   syslog-etc:
+    external: true
   syslog-log:
+    external: true
 
