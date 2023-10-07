@@ -2,24 +2,23 @@ FROM ubuntu as build
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt update                     \
-&&  apt full-upgrade -y            \
-    --no-install-recommends        \
-&&  apt install      -y            \
-    --no-install-recommends        \
-    rsyslog-pgsql                  \
-&&  apt autoremove   -y            \
-    --purge                        \
-&&  apt clean        -y            \
-&&  rm -rf /var/lib/apt/lists/*
-
-RUN sed -i                          \
+RUN apt update                      \
+&&  apt full-upgrade -y             \
+    --no-install-recommends         \
+&&  apt install      -y             \
+    --no-install-recommends         \
+    rsyslog-pgsql                   \
+&&  apt autoremove   -y             \
+    --purge                         \
+&&  apt clean        -y             \
+&&  rm -rf /var/lib/apt/lists/*     \
+&&  sed -i                          \
     's@^module(load="imklog".*@#&@' \
     /etc/rsyslog.conf
 
-ENTRYPOINT [                       \
-  "/usr/sbin/rsyslogd",            \
-  "-n"                             \
+ENTRYPOINT [                        \
+  "/usr/sbin/rsyslogd",             \
+  "-n"                              \
 ]
 
 #CMD [                              \
